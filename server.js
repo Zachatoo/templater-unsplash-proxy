@@ -12,21 +12,26 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 
 app.get("/", async (req, res) => {
-  const { q } = req.query;
-  const obj = {};
-  if (q) {
-    obj.query = q;
-  }
-  const result = await unsplash.photos.getRandom(obj);
+  try {
+    const { q } = req.query;
+    const obj = {};
+    if (q) {
+      obj.query = q;
+    }
+    const result = await unsplash.photos.getRandom(obj);
 
-  if (result.errors) {
-    res.send(result.errors);
+    if (result.errors) {
+      res.send(result.errors);
+      return;
+    }
+    const photo = result.response;
+    const full = photo.urls.full;
+    const photog = photo.user.name;
+    const md = `![photo by ${photog} on Unsplash](${full})`;
+    res.send({ full, photog, md });
+  } catch (err) {
+    res.send(err);
   }
-  const photo = result.response;
-  const full = photo.urls.full;
-  const photog = photo.user.name;
-  const md = `![photo by ${photog} on Unsplash](${full})`;
-  res.send({ full, photog, md });
 });
 
 app.listen(port, () => console.log(`app listening on port ${port}!`));
