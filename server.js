@@ -1,11 +1,9 @@
 import express from "express";
 import cors from "cors";
 import { createApi } from "unsplash-js";
-import nodeFetch from "node-fetch";
 
 const unsplash = createApi({
   accessKey: process.env.UNSPLASH_ACCESS_KEY,
-  fetch: nodeFetch,
 });
 const app = express();
 const port = process.env.PORT || 3000;
