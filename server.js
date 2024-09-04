@@ -24,9 +24,9 @@ app.get("/", async (req, res) => {
     const photo = await response.json();
     const full = photo.urls.full;
     const photog = photo.user.name;
-    const userLink = `${photo.user.links.html}?utm_source=templater_proxy&utm_medium=referral`;
-    const md = `![photo by ${photog}(${userLink}) on Unsplash](${full})`;
-    res.send({ full, photog, md });
+    const photogUrl = `${photo.user.links.html}?utm_source=templater_proxy&utm_medium=referral`;
+    const md = `![photo by ${photog}(${photogUrl}) on Unsplash](${full})`;
+    res.send({ full, photog, photogUrl, md });
   } catch (err) {
     res.status(500).send(err);
   }
