@@ -9,7 +9,7 @@ The express app is deployed on [fly.io](https://fly.io).
 
 - You'll need an access key from [Unsplash](https://unsplash.com/developers).
   Set this as an env variable: `UNSPLASH_ACCESS_KEY`
-- `pnpm run` will launch the server locally
+- `pnpm start` will launch the server locally
 - `http://localhost:3030` should display an object with values from the Unsplash
   API.
 
