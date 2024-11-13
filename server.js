@@ -9,7 +9,8 @@ app.use(cors());
 app.get("/", async (req, res) => {
   try {
     const { q } = req.query;
-    const searchParams = new URLSearchParams(q);
+    const searchParams = new URLSearchParams();
+    searchParams.append("query", q);
     const url = new URL(`/photos/random?${searchParams}`, baseUrl);
     const response = await fetch(url, {
       headers: {
